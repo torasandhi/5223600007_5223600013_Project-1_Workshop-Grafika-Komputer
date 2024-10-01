@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\asus vivobook\\Desktop\\Rangga_Tora_Project1WCG\\",
+  "WorkspaceRootPath": "D:\\PENS\\Tugas\\Semester 3\\WCG\\Rangga_Tora_Project1WCG\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D9D328E5-7175-4A31-88C1-F12547A59613}|Square.vcxproj|C:\\Users\\asus vivobook\\Desktop\\Rangga_Tora_Project1WCG\\meja_lab_wcg.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{D9D328E5-7175-4A31-88C1-F12547A59613}|Square.vcxproj|D:\\PENS\\Tugas\\Semester 3\\WCG\\Rangga_Tora_Project1WCG\\meja_lab_wcg.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D9D328E5-7175-4A31-88C1-F12547A59613}|Square.vcxproj|solutionrelative:meja_lab_wcg.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -24,11 +24,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "meja_lab_wcg.cpp",
-              "DocumentMoniker": "C:\\Users\\asus vivobook\\Desktop\\Rangga_Tora_Project1WCG\\meja_lab_wcg.cpp",
+              "DocumentMoniker": "D:\\PENS\\Tugas\\Semester 3\\WCG\\Rangga_Tora_Project1WCG\\meja_lab_wcg.cpp",
               "RelativeDocumentMoniker": "meja_lab_wcg.cpp",
-              "ToolTip": "C:\\Users\\asus vivobook\\Desktop\\Rangga_Tora_Project1WCG\\meja_lab_wcg.cpp",
+              "ToolTip": "D:\\PENS\\Tugas\\Semester 3\\WCG\\Rangga_Tora_Project1WCG\\meja_lab_wcg.cpp",
               "RelativeToolTip": "meja_lab_wcg.cpp",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "ViewState": "AQIAACwAAAAAAAAAAAAAAAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-08-28T08:35:33.413Z",
               "EditorCaption": ""
