@@ -1,80 +1,51 @@
 #define _USE_MATH_DEFINES 
-
 /*
 Project 1 Workshop Grafika Komputer
-Anggota : 
+Anggota :
 1. Rangga Raisha Syaputra (5223600007)
 2. Tora Sandhi Kamulian (5223600013)
-
-Object Meja
-
 */
-
 #include <iostream>
 #include <C:\Users\asus vivobook\OpenGLwrappers\OpenGLwrappers\glew-1.10.0\include\GL\glew.h>
 #include <C:\Users\asus vivobook\OpenGLwrappers\OpenGLwrappers\freeglut\include\GL\freeglut.h> 
-
 #include <GL/glut.h>
 
 float sudutRotasi = 0.0f;
+const float ROTATION_SPEED = 5.0f;
+
+
+const GLfloat WARNA_MEJA[] = { 0.7f, 0.7f, 0.7f };        
+const GLfloat WARNA_PENUTUP[] = { 0.518f, 0.306f, 0.161f }; 
 
 void inisialisasi() {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-
-    // Pengaturan cahaya
-    GLfloat posisi_cahaya[] = { 1.0, 1.0, 1.0, 0.0 };
-    GLfloat cahaya_putih[] = { 1.0, 1.0, 1.0, 1.0 };
-    glLightfv(GL_LIGHT0, GL_POSITION, posisi_cahaya);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, cahaya_putih);
+    glClearColor(0.0, 0.0, 0.0, 0.0);  
+    glEnable(GL_DEPTH_TEST);           
 }
 
 void gambarMeja() {
-    GLfloat abu_abu[] = { 0.7, 0.7, 0.7, 1.0 };
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, abu_abu);
-
-    // TRANSFORMASI 1: Rotasi seluruh meja
     glRotatef(sudutRotasi, 0.0f, 1.0f, 0.0f);
 
-    // Gambar permukaan meja
+    glColor3fv(WARNA_MEJA);
+
     glPushMatrix();
-    // TRANSFORMASI 2: Translasi untuk permukaan meja
     glTranslatef(0.0, 0.5, 0.0);
-    // TRANSFORMASI 3: Penskalaan untuk permukaan meja
     glScalef(2.0, 0.1, 1.5);
     glutSolidCube(1.0);
     glPopMatrix();
 
-    // Gambar kaki-kaki meja dengan transformasi individual
-    // Kaki 1
-    glPushMatrix();
-    // TRANSFORMASI 4: Translasi untuk kaki meja 1
-    glTranslatef(-0.8, 0.0, -0.5);
-    // TRANSFORMASI 5: Penskalaan untuk kaki meja
-    glScalef(0.1, 1.0, 0.1);
-    glutSolidCube(1.0);
-    glPopMatrix();
+    float kakiPosisi[4][2] = { {-0.8, -0.5}, {0.8, -0.5}, {-0.8, 0.5}, {0.8, 0.5} };
+    for (int i = 0; i < 4; i++) {
+        glPushMatrix();
+        glTranslatef(kakiPosisi[i][0], 0.0, kakiPosisi[i][1]);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+        glPopMatrix();
+    }
 
-    // Kaki 2
+    glColor3fv(WARNA_PENUTUP);
     glPushMatrix();
-    glTranslatef(0.8, 0.0, -0.5);
-    glScalef(0.1, 1.0, 0.1);
-    glutSolidCube(1.0);
-    glPopMatrix();
-
-    // Kaki 3
-    glPushMatrix();
-    glTranslatef(-0.8, 0.0, 0.5);
-    glScalef(0.1, 1.0, 0.1);
-    glutSolidCube(1.0);
-    glPopMatrix();
-
-    // Kaki 4
-    glPushMatrix();
-    glTranslatef(0.8, 0.0, 0.5);
-    glScalef(0.1, 1.0, 0.1);
+    glTranslatef(0.0, 0.25, -0.5);
+    glScalef(1.5, 0.5, 0.05);
     glutSolidCube(1.0);
     glPopMatrix();
 }
@@ -83,33 +54,40 @@ void tampilan() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // PERSPEKTIF 3D: Pengaturan posisi kamera dan pandangan
-    gluLookAt(3.0, 2.0, 3.0,  // Posisi mata
-        0.0, 0.0, 0.0,  // Titik yang dilihat
-        0.0, 1.0, 0.0); // Vektor atas
+    gluLookAt(3.0, 2.0, 3.0,  
+        0.0, 0.0, 0.0,  
+        0.0, 1.0, 0.0); 
 
     gambarMeja();
-
     glutSwapBuffers();
 }
 
-// PERSPEKTIF 3D: Implementasi proyeksi perspektif
 void ubahUkuranLayar(int w, int h) {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    // PERSPEKTIF 3D: Pengaturan proyeksi perspektif
     gluPerspective(45.0, (float)w / (float)h, 1.0, 100.0);
     glMatrixMode(GL_MODELVIEW);
 }
 
-void perbarui(int nilai) {
-    sudutRotasi += 2.0f;
+void keyboard(int key, int x, int y) {
+    switch (key) {
+    case GLUT_KEY_LEFT:
+        sudutRotasi -= ROTATION_SPEED;
+        break;
+    case GLUT_KEY_RIGHT:
+        sudutRotasi += ROTATION_SPEED;
+        break;
+    }
+
     if (sudutRotasi > 360.0f) {
         sudutRotasi -= 360.0f;
     }
+    else if (sudutRotasi < 0.0f) {
+        sudutRotasi += 360.0f;
+    }
+
     glutPostRedisplay();
-    glutTimerFunc(16, perbarui, 0);
 }
 
 int main(int argc, char** argv) {
@@ -122,7 +100,7 @@ int main(int argc, char** argv) {
 
     glutDisplayFunc(tampilan);
     glutReshapeFunc(ubahUkuranLayar);
-    glutTimerFunc(0, perbarui, 0);
+    glutSpecialFunc(keyboard);
 
     glutMainLoop();
     return 0;
